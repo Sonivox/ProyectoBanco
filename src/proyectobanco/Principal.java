@@ -6,7 +6,6 @@ Ronald Remberto Rivas Rodirigues */
 
 public class Principal {
     public static void main(String[] args) {
-     cajero cajero = new cajero();
-     cajero.show();
+        new Thread(new splash()).start();
     }
 }
