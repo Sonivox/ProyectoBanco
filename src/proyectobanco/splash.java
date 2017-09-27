@@ -50,7 +50,7 @@ public class splash extends javax.swing.JFrame implements Runnable{
         setUndecorated(true);
         setType(java.awt.Window.Type.UTILITY);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Roberto\\Downloads\\IMAGENES PROYECTO BANCO\\45939241515a561751ed6222f2012003-banco-icono-cuadrado-by-vexels.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/45939241515a561751ed6222f2012003-banco-icono-cuadrado-by-vexels.png"))); // NOI18N
         jLabel1.setAlignmentY(0.0F);
         jLabel1.setName(""); // NOI18N
 

@@ -49,7 +49,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Roberto\Downloads\IMAGENES PROYECTO BANCO\45939241515a561751ed6222f2012003-banco-icono-cuadrado-by-vexels.png"/>
+          <Image iconType="3" name="/imagenes/45939241515a561751ed6222f2012003-banco-icono-cuadrado-by-vexels.png"/>
         </Property>
         <Property name="alignmentY" type="float" value="0.0"/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
