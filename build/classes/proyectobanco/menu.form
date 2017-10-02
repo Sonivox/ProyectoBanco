@@ -59,7 +59,7 @@
               <Font name="Arial" size="12" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/conseguir-dinero.png"/>
+              <Image iconType="3" name="/imagenes/reti.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="RETIRO"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -74,7 +74,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="50" y="70" width="170" height="90"/>
+              <AbsoluteConstraints x="20" y="50" width="180" height="70"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -106,7 +106,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="130" y="290" width="200" height="70"/>
+              <AbsoluteConstraints x="20" y="380" width="180" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -116,7 +116,7 @@
               <Font name="Arial" size="12" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/cambiar.png"/>
+              <Image iconType="3" name="/imagenes/pis.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="DEPOSITO"/>
           </Properties>
@@ -125,7 +125,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="260" y="180" width="170" height="90"/>
+              <AbsoluteConstraints x="20" y="290" width="180" height="70"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -135,7 +135,7 @@
               <Font name="Arial" size="12" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/rico.png"/>
+              <Image iconType="3" name="/imagenes/sal.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SALDO"/>
           </Properties>
@@ -144,7 +144,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="260" y="70" width="170" height="90"/>
+              <AbsoluteConstraints x="20" y="220" width="180" height="60"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -154,7 +154,7 @@
               <Font name="Arial" size="12" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/grafico.png"/>
+              <Image iconType="3" name="/imagenes/transa.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="TRANSSACIONES"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -169,7 +169,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="50" y="180" width="170" height="90"/>
+              <AbsoluteConstraints x="20" y="130" width="180" height="80"/>
             </Constraint>
           </Constraints>
         </Component>
