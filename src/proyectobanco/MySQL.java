@@ -7,7 +7,19 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class MySQL {
-    Connection conexion = null;
+    public static void connect(){
+        String url = "jdbc:mysql://localhost:3306/banco?zeroDateTimeBehavior=convertToNull";
+        String user = "root";
+        String pass = "";
+        System.out.println("Conectando...");
+        try(Connection connection = DriverManager.getConnection(url, user,pass)){
+            System.out.println("Conectado!!");
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    /*Connection conexion = null;
     Statement comando = null;
     ResultSet registro;
     
@@ -37,5 +49,5 @@ public class MySQL {
             JOptionPane.showMessageDialog(null, "Conexión Exitosa");
             return conexion;
         }
-    }
+    }*/
 }
