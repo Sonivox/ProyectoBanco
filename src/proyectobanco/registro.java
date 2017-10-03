@@ -5,6 +5,10 @@
  */
 package proyectobanco;
 
+import com.sun.istack.internal.logging.Logger;
+import java.sql.SQLException;
+import java.util.logging.Level;
+
 /**
  *
  * @author Ronald
@@ -116,6 +120,45 @@ public class registro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        MySQL db = new MySQL();
+        db.MySQLConnect();
+        try {
+ 
+            /* Se establece el nombre de la base de datos que contiene 
+             la información que se quiere consultar
+             */
+            String NombreDB = "Registro";
+            
+             /* Se establece la consulta que se desea hacer.
+            Select se encargará de seleccionar todos los datos
+            (representado por *) desde (FROM) la base de datos
+            llamada "Registro"
+             */
+            
+            String Query = "SELECT * FROM " + NombreDB;
+            
+            
+            /* Se crea una declaración y se establece el Query que se
+            desea ejecutar
+             */
+            
+            db.comando = db.conexion.createStatement();
+            db.registro = db.comando.executeQuery(Query);
+ 
+            /* Se imprimen los registros que estén guardados en 
+            la base de datos
+             */
+            while (db.registro.next()) {
+                
+                System.out.println("Nombre: " + db.registro.getString(1) + 
+                        "\nApellido: " + db.registro.getString(2) +
+                        "\nEmail: " + db.registro.getString(3));
+                
+                System.out.println("------------------------------------------");
+            }
+        } catch (SQLException ex) {
+            
+        }
         cajero abrir = new cajero();
         abrir.setVisible(true);
         this.setVisible(false);
