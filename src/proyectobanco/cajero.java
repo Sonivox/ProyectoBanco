@@ -1,4 +1,8 @@
 package proyectobanco;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class cajero extends javax.swing.JFrame {
     public cajero() {
         initComponents();
@@ -8,14 +12,14 @@ public class cajero extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        registroBTN = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        loginBTN = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        usuTXT = new javax.swing.JTextField();
+        conPASS = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -29,16 +33,16 @@ public class cajero extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton1.setText("Registrarse");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        registroBTN.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        registroBTN.setText("Registrarse");
+        registroBTN.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        registroBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registroBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                registroBTNActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 100, 40));
+        getContentPane().add(registroBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 100, 40));
 
         jLabel2.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -50,16 +54,16 @@ public class cajero extends javax.swing.JFrame {
         jLabel3.setText("Contraseña");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton2.setText("Iniciar Sesion");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        loginBTN.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        loginBTN.setText("Iniciar Sesion");
+        loginBTN.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        loginBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        loginBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                loginBTNActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 100, 40));
+        getContentPane().add(loginBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 100, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/2.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
@@ -67,13 +71,13 @@ public class cajero extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/3.png"))); // NOI18N
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 70, 70));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        usuTXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                usuTXTActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 140, 20));
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 140, -1));
+        getContentPane().add(usuTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 140, 20));
+        getContentPane().add(conPASS, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 140, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/green-background-920072_960_720.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -86,21 +90,32 @@ public class cajero extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void registroBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroBTNActionPerformed
         registro abrir = new registro ();
         abrir.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_registroBTNActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void usuTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuTXTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_usuTXTActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void loginBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBTNActionPerformed
         menu abrir = new menu();
         abrir.setVisible(true);
-        this.setVisible(false);      
-    }//GEN-LAST:event_jButton2ActionPerformed
+        this.setVisible(false);
+        try {
+            
+            String usuario = "Roberto";
+            String contra = "Maltez";
+            
+            MySQL db = new MySQL();
+            db.crearConexion();
+            db.validarUsuario(usuario, contra);
+                    } catch (Exception ex) {
+            Logger.getLogger(cajero.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_loginBTNActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -111,14 +126,14 @@ public class cajero extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JPasswordField conPASS;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton loginBTN;
+    private javax.swing.JButton registroBTN;
+    private javax.swing.JTextField usuTXT;
     // End of variables declaration//GEN-END:variables
 }

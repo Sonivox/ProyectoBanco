@@ -10,6 +10,9 @@ import javax.swing.JTextField;
 public class MySQL {
 
     private Connection conexion;
+    private String servidor = "jdbc:mysql://localhost:3306/banco";
+    private String usuario = "root";
+    private String contra = "";
     
     public Connection getConexion()
     {
@@ -20,7 +23,7 @@ public class MySQL {
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco","root","");
+            conexion = DriverManager.getConnection(servidor, usuario, contra);
             System.out.println(conexion);
         }
         catch (SQLException ex) {
@@ -33,31 +36,32 @@ public class MySQL {
         }
         return true;
     }
-    
-    public boolean ejecutarSQL(String sql){
-        try {
-            Statement sentencia = conexion.createStatement();
-            sentencia.executeUpdate(sql);
-        }
-        catch (SQLException ex) {
-            ex.printStackTrace();
+      boolean validarUsuario(String getUsuario, String getPassword)  throws Exception {
+            try{
+//Driver JDBC
+            Class.forName("com.mysql.jdbc.Driver");
+            conexion = DriverManager.getConnection(servidor, usuario, contra);
+
+           String sql = "SELECT * FROM clientes where nombre_cliente ='"+getUsuario+"'"+" and apellido_cliente='"+getPassword+"';";
+
+//nuestro evento captura el usuario y password de nuestro formulario y lo busca en la consulta sql
+
+            Statement st = conexion.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+              
+                if( rs.first() )  // si es valido el primer registro. hay una fila, entonces el usuario y su                                                //contraseña existen       
+                return true;        //
+            else
+                return false;
+      }
+     catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("nel");
             return false;
         }
-        return true;
-    }
-    
-    public ResultSet ejecutarSQLSelect(String sql){
-        ResultSet resultado;
-        try {
-            Statement sentencia = conexion.createStatement();
-            resultado = sentencia.executeQuery(sql);
-        }
-        catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return resultado;
-    }
+
     
     /*public static void connect(){
         String url = "jdbc:mysql://localhost:3306/banco?zeroDateTimeBehavior=convertToNull";
@@ -102,12 +106,5 @@ public class MySQL {
             return conexion;
         }
     }*/
-
-    void ejecutarSQL(JTextField jTextField1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void ejecutarSQLSelect(JTextField jTextField1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
