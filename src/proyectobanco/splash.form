@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-      <Color blue="33" green="33" red="33" type="rgb"/>
-    </Property>
-    <Property name="focusable" type="boolean" value="false"/>
-    <Property name="focusableWindowState" type="boolean" value="false"/>
-    <Property name="name" type="java.lang.String" value="splashJF" noResource="true"/>
     <Property name="undecorated" type="boolean" value="true"/>
-    <Property name="type" type="java.awt.Window$Type" editor="org.netbeans.modules.form.editors.EnumEditor">
-      <Value id="UTILITY"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -33,12 +23,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jLabel1" min="-2" pref="481" max="-2" attributes="0"/>
+          <Component id="jLabel1" min="-2" pref="491" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jLabel1" alignment="1" pref="411" max="32767" attributes="0"/>
+          <Component id="jLabel1" min="-2" pref="458" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -46,10 +36,8 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/imagenes/45939241515a561751ed6222f2012003-banco-icono-cuadrado-by-vexels.png"/>
+          <Image iconType="3" name="/imagenes/fondo - splash.png"/>
         </Property>
-        <Property name="alignmentY" type="float" value="0.0"/>
-        <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>
