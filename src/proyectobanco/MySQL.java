@@ -4,63 +4,54 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 public class MySQL {
 
-    private Connection conexion;
+    private static Connection Conexion;
     private String servidor = "jdbc:mysql://localhost:3306/banco";
     private String usuario = "root";
     private String contra = "";
     
-    public Connection getConexion()
-    {
-        return conexion;
-    }
-    
-    public boolean crearConexion()
-    {
+    public void MySQLConnection() throws Exception {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection(servidor, usuario, contra);
-            System.out.println(conexion);
-        }
-        catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
+            Conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco", usuario, contra);
+            JOptionPane.showMessageDialog(null, "Se ha iniciado la conexión con el servidor de forma exitosa");
         }
         catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-            return false;
+            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return true;
+        catch (SQLException ex) {
+            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-      boolean validarUsuario(String getUsuario, String getPassword)  throws Exception {
-            try{
-//Driver JDBC
-            Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection(servidor, usuario, contra);
-
-           String sql = "SELECT * FROM clientes where nombre_cliente ='"+getUsuario+"'"+" and apellido_cliente='"+getPassword+"';";
-
-//nuestro evento captura el usuario y password de nuestro formulario y lo busca en la consulta sql
-
-            Statement st = conexion.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-
-              
-                if( rs.first() )  // si es valido el primer registro. hay una fila, entonces el usuario y su                                                //contraseña existen       
-                return true;        //
-            else
-                return false;
-      }
-     catch (Exception e)
-        {
-            e.printStackTrace();
-            System.out.println("nel");
-            return false;
+    public void cerrarConnection(){
+        try {
+            Conexion.close();
+            JOptionPane.showMessageDialog(null, "Se ha finalizado la conexión con el servidor");
         }
+        catch (SQLException ex) {
+            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void insertData(String table, String nombre, String apellido, String DUI, String correo, String telefono) {
+        try {
+            String Query = "INSERT INTO " + table + " VALUES("
+                    + "\"" + nombre + "\", "
+                    + "\"" + apellido + "\", "
+                    + "\"" + DUI + "\", "
+                    + "\"" + correo + "\", "
+                    + "\"" + telefono + "\")";
+            Statement st = Conexion.createStatement();
+            st.executeUpdate(Query);
+            JOptionPane.showMessageDialog(null, "Datos almacenados de forma exitosa");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en el almacenamiento de datos");
+        }
+    
 
     
     /*public static void connect(){

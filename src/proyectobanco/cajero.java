@@ -1,5 +1,4 @@
 package proyectobanco;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -104,15 +103,10 @@ public class cajero extends javax.swing.JFrame {
         menu abrir = new menu();
         abrir.setVisible(true);
         this.setVisible(false);
+        MySQL db = new MySQL();
         try {
-            
-            String usuario = "Roberto";
-            String contra = "Maltez";
-            
-            MySQL db = new MySQL();
-            db.crearConexion();
-            db.validarUsuario(usuario, contra);
-                    } catch (Exception ex) {
+            db.MySQLConnection();
+        } catch (Exception ex) {
             Logger.getLogger(cajero.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loginBTNActionPerformed
