@@ -41,9 +41,9 @@ public class MySQL {
     }
     
     //INSERTAR DATOS EN LA TABLA DE DATOS
-    public void insertData(String table, String nombre, String apellido, String DUI, String correo, String telefono) {
+    public void insertData(String nombre, String apellido, String DUI, String correo, String telefono) {
         try {
-            String Query = "INSERT INTO " + table + " VALUES("
+            String Query = "INSERT INTO clientes" + " VALUES("
                     + "\"" + nombre + "\", "
                     + "\"" + apellido + "\", "
                     + "\"" + DUI + "\", "
@@ -55,5 +55,29 @@ public class MySQL {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error en el almacenamiento de datos");
         }
+    }
+    
+    //METODO PARA LAS CONSULTAS DE TODOS LOS CLIENTES 
+    public void getValues (){
+        try {
+            String Query = "SELECT * FROM clientes";
+            Statement st = Conexion.createStatement();
+            java.sql.ResultSet resultSet;
+            resultSet = st.executeQuery(Query);
+ 
+            while (resultSet.next()) {
+                System.out.println("DUI: " + resultSet.getString("DUI_cli")
+                        + "\n Nombre: " + resultSet.getString("nombre_cliente") + resultSet.getString("apellido_cliente")
+                        + "\n Correo: " + resultSet.getString("correo_cliente")
+                        + "\n Telefono: " + resultSet.getString("telefono_cliente"));
+            }
+ 
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en la adquisición de datos");
+        }
+    }
+    
+    //METODO PARA CONSULTAR UN SOLO CLIENTE
+    public void validarUsuario(){
     }
 }

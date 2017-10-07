@@ -113,7 +113,7 @@ public class registro extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String table = "clientes", nombre = "ronald", apellido = "Rivas", DUI = "1234"
+        String nombre = "ronald", apellido = "Rivas", DUI = "1234"
                 , correo = "ronald@gmail.com", telefono = "77771111";
         try {
             // TODO add your handling code here:
@@ -122,7 +122,7 @@ public class registro extends javax.swing.JFrame {
             this.setVisible(false);
             MySQL db = new MySQL();
             db.MySQLConnection();
-            db.insertData(table, nombre, apellido, DUI, correo, telefono);
+            db.insertData(nombre, apellido, DUI, correo, telefono);
         } catch (Exception ex) {
             Logger.getLogger(registro.class.getName()).log(Level.SEVERE, null, ex);
         }
