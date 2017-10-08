@@ -93,7 +93,7 @@ public class menu extends javax.swing.JFrame {
 
         jButton1.setText("$ 20");
         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 182, 53, 29));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 53, 29));
 
         jButton2.setText("$ 40");
         jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
