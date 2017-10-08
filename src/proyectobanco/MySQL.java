@@ -78,6 +78,21 @@ public class MySQL {
     }
     
     //METODO PARA CONSULTAR UN SOLO CLIENTE
-    public void validarUsuario(){
+    public void validarUsuario(String usuario, String pass){
+        try{
+
+            String Query = "SELECT * FROM clientes where nombre_cliente='"+ usuario+"'"+" and DUI_cli='"+ pass+"';";
+            Statement st = Conexion.createStatement();
+            ResultSet rs = st.executeQuery(Query);
+            if( rs.first() ){
+                JOptionPane.showMessageDialog(null, "BIENBENIDO");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA NO VALIDOS");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

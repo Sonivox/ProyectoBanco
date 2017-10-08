@@ -1,6 +1,7 @@
 package proyectobanco;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextField;
 
 public class cajero extends javax.swing.JFrame {
     public cajero() {
@@ -103,6 +104,7 @@ public class cajero extends javax.swing.JFrame {
         MySQL db = new MySQL();
         try {
             db.MySQLConnection();
+            db.validarUsuario(usuTXT.getText(), contraTXT.getText());
         } catch (Exception ex) {
             Logger.getLogger(cajero.class.getName()).log(Level.SEVERE, null, ex);
         }
