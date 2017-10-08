@@ -4,110 +4,95 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 public class MySQL {
 
-    private Connection conexion;
+    private static Connection Conexion;
+    private String usuario = "root";
+    private String contra = "";
     
-    public Connection getConexion()
-    {
-        return conexion;
-    }
-    
-    public boolean crearConexion()
-    {
+    //METODO PARA LA CONEXION CON LA BASE DE DATOS
+    public void MySQLConnection() throws Exception {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco","root","");
-            System.out.println(conexion);
-        }
-        catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
+            Conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco", usuario, contra);
+            JOptionPane.showMessageDialog(null, "Se ha iniciado la conexión con el servidor de forma exitosa");
         }
         catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-    
-    public boolean ejecutarSQL(String sql){
-        try {
-            Statement sentencia = conexion.createStatement();
-            sentencia.executeUpdate(sql);
+            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
+            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return true;
     }
     
-    public ResultSet ejecutarSQLSelect(String sql){
-        ResultSet resultado;
+    //CERRAR LA CONEXION CON LA BASE DE DATOS
+    public void cerrarConnection(){
         try {
-            Statement sentencia = conexion.createStatement();
-            resultado = sentencia.executeQuery(sql);
+            Conexion.close();
+            JOptionPane.showMessageDialog(null, "Se ha finalizado la conexión con el servidor");
         }
         catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
+            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return resultado;
     }
     
-    /*public static void connect(){
-        String url = "jdbc:mysql://localhost:3306/banco?zeroDateTimeBehavior=convertToNull";
-        String user = "root";
-        String pass = "";
-        System.out.println("Conectando...");
-        try(Connection connection = DriverManager.getConnection(url, user,pass)){
-            System.out.println("Conectado!!");
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
-    }*/
-    
-    /*Connection conexion = null;
-    Statement comando = null;
-    ResultSet registro;
-    
-    public Connection MySQLConnect() {
- 
+    //INSERTAR DATOS EN LA TABLA DE DATOS
+    public void insertData(String nombre, String apellido, String DUI, String correo, String telefono) {
         try {
-            //Driver JDBC
-            Class.forName("com.mysql.jdbc.Driver");
-            //Nombre del servidor. localhost:3306 es la ruta y el puerto de la conexión MySQL
-            String servidor = "jdbc:mysql://localhost:3306/banco?zeroDateTimeBehavior=convertToNull";
-            //El root es el nombre de usuario por default. No hay contraseña
-            String usuario = "root";
-            String pass = "";
-            //Se inicia la conexión
-            conexion = DriverManager.getConnection(servidor, usuario, pass);
- 
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error en la conexión a la base de datos: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
-            conexion = null;
+            String Query = "INSERT INTO clientes" + " VALUES("
+                    + "\"" + nombre + "\", "
+                    + "\"" + apellido + "\", "
+                    + "\"" + DUI + "\", "
+                    + "\"" + correo + "\", "
+                    + "\"" + telefono + "\")";
+            Statement st = Conexion.createStatement();
+            st.executeUpdate(Query);
+            JOptionPane.showMessageDialog(null, "Datos almacenados de forma exitosa");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error en la conexión a la base de datos: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
-            conexion = null;
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error en la conexión a la base de datos: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
-            conexion = null;
-        } finally {
-            JOptionPane.showMessageDialog(null, "Conexión Exitosa");
-            return conexion;
+            JOptionPane.showMessageDialog(null, "Error en el almacenamiento de datos");
         }
-    }*/
-
-    void ejecutarSQL(JTextField jTextField1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    //METODO PARA LAS CONSULTAS DE TODOS LOS CLIENTES 
+    public void getValues (){
+        try {
+            String Query = "SELECT * FROM clientes";
+            Statement st = Conexion.createStatement();
+            java.sql.ResultSet resultSet;
+            resultSet = st.executeQuery(Query);
+ 
+            while (resultSet.next()) {
+                System.out.println("DUI: " + resultSet.getString("DUI_cli")
+                        + "\n Nombre: " + resultSet.getString("nombre_cliente") + resultSet.getString("apellido_cliente")
+                        + "\n Correo: " + resultSet.getString("correo_cliente")
+                        + "\n Telefono: " + resultSet.getString("telefono_cliente"));
+            }
+ 
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en la adquisición de datos");
+        }
+    }
+    
+    //METODO PARA CONSULTAR UN SOLO CLIENTE
+    public void validarUsuario(String usuario, String pass){
+        try{
 
-    void ejecutarSQLSelect(JTextField jTextField1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            String Query = "SELECT * FROM clientes where nombre_cliente='"+ usuario+"'"+" and DUI_cli='"+ pass+"';";
+            Statement st = Conexion.createStatement();
+            ResultSet rs = st.executeQuery(Query);
+            if( rs.first() ){
+                JOptionPane.showMessageDialog(null, "BIENBENIDO");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA NO VALIDOS");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

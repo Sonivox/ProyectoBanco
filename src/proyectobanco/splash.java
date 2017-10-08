@@ -1,37 +1,27 @@
 package proyectobanco;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Roberto
- */
 public class splash extends javax.swing.JFrame implements Runnable{
-
-    /**
-     * Creates new form splas
-     */
+    
     Thread t;
     public splash() {
         initComponents();
-          setLocationRelativeTo(null);
     }
-    
-    @Override
-    public void run() {
-        try {
+    public void run(){
+        try{
             this.setLocationRelativeTo(null);
             this.setVisible(true);
             t.sleep(5000);
             this.dispose();
-            cajero cajero = new cajero();
-            cajero.setVisible(true);
-        } catch (InterruptedException ex) {
+            cajero c = new cajero();
+            c.setVisible(true);
+        }
+        catch(InterruptedException ex){
             Logger.getLogger(splash.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,27 +33,23 @@ public class splash extends javax.swing.JFrame implements Runnable{
 
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(51, 51, 51));
-        setFocusable(false);
-        setFocusableWindowState(false);
-        setName("splashJF"); // NOI18N
         setUndecorated(true);
-        setType(java.awt.Window.Type.UTILITY);
+        setResizable(false);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/45939241515a561751ed6222f2012003-banco-icono-cuadrado-by-vexels.png"))); // NOI18N
-        jLabel1.setAlignmentY(0.0F);
-        jLabel1.setName(""); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo - splash.png"))); // NOI18N
+        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 411, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -80,7 +66,7 @@ public class splash extends javax.swing.JFrame implements Runnable{
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -94,13 +80,6 @@ public class splash extends javax.swing.JFrame implements Runnable{
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

@@ -113,13 +113,19 @@ public class registro extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        MySQL db = new MySQL();
-        db.crearConexion();
-        
-        cajero abrir = new cajero();
-        abrir.setVisible(true);
-        this.setVisible(false);
+        String nombre = "ronald", apellido = "Rivas", DUI = "1234"
+                , correo = "ronald@gmail.com", telefono = "77771111";
+        try {
+            // TODO add your handling code here:
+            cajero abrir = new cajero();
+            abrir.setVisible(true);
+            this.setVisible(false);
+            MySQL db = new MySQL();
+            db.MySQLConnection();
+            db.insertData(nombre, apellido, DUI, correo, telefono);
+        } catch (Exception ex) {
+            Logger.getLogger(registro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
