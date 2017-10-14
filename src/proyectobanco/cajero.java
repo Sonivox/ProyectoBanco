@@ -44,8 +44,7 @@ public class cajero extends javax.swing.JFrame {
 
         loginBTN.setFont(new java.awt.Font("Cambria Math", 1, 12)); // NOI18N
         loginBTN.setText("INICIAR SESION");
-        loginBTN.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        loginBTN.setBorderPainted(false);
+        loginBTN.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
         loginBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginBTN.setOpaque(false);
         loginBTN.addActionListener(new java.awt.event.ActionListener() {
@@ -53,7 +52,7 @@ public class cajero extends javax.swing.JFrame {
                 loginBTNActionPerformed(evt);
             }
         });
-        getContentPane().add(loginBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 110, 50));
+        getContentPane().add(loginBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 120, 60));
 
         usuTXT.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         usuTXT.setHorizontalAlignment(javax.swing.JTextField.CENTER);
