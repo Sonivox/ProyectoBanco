@@ -2,13 +2,13 @@ package proyectobanco;
 import java.util.Calendar;
 
 public class fecha {
-    Calendar ahora = Calendar.getInstance();
-    int hora = ahora.get(Calendar.HOUR_OF_DAY);
-    int minuto = ahora.get(Calendar.MINUTE);
-    int mes = ahora.get(Calendar.MONTH) + 1;
-    int dia = ahora.get(Calendar.DAY_OF_MONTH);
-    int año = ahora.get(Calendar.YEAR);
-    String fecha, nombre = null;
+    private Calendar ahora = Calendar.getInstance();
+    private int hora = ahora.get(Calendar.HOUR_OF_DAY);
+    private int minuto = ahora.get(Calendar.MINUTE);
+    private int mes = ahora.get(Calendar.MONTH) + 1;
+    private int dia = ahora.get(Calendar.DAY_OF_MONTH);
+    private int año = ahora.get(Calendar.YEAR);
+    public String fecha, nombre = null;
     
     public void fecha(){
         switch(mes){
@@ -50,6 +50,5 @@ public class fecha {
                 break;
         }
         fecha = (hora + " : " + minuto + " P.M." + " del " +  dia + " de " + nombre +" / " + año );
-        System.out.println(fecha);
     }
 }

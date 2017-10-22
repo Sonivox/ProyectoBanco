@@ -11,14 +11,16 @@ import javax.swing.JOptionPane;
 public class MySQL {
 
     private static Connection Conexion;
-    private String usuario = "root";
-    private String contra = "";
     
-    //METODO PARA LA CONEXION CON LA BASE DE DATOS
+    /*METODO PARA LA CONEXION CON LA BASE DE DATOS:
+    se usa el driver de java para concetarce y se le pasan los
+    datos del servidor, usuario y contraseña luego tira 
+    un MessagDialog para confimar la conexion o sino se
+    resulta algun error se redirecionar al catch*/
     public void MySQLConnection() throws Exception {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/banco", usuario, contra);
+            Conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/cajero", "root", "");
             JOptionPane.showMessageDialog(null, "Se ha iniciado la conexión con el servidor de forma exitosa");
         }
         catch (ClassNotFoundException ex) {
@@ -40,7 +42,7 @@ public class MySQL {
         }
     }
     
-    //INSERTAR DATOS EN LA TABLA DE DATOS
+    /*INSERTAR DATOS EN LA TABLA DE DATOS */
     public void insertData(String nombre, String apellido, String DUI, String correo, String telefono) {
         try {
             String Query = "INSERT INTO clientes" + " VALUES("
@@ -57,19 +59,22 @@ public class MySQL {
         }
     }
     
-    //METODO PARA LAS CONSULTAS DE TODOS LOS CLIENTES 
+    /* METODO PARA LAS CONSULTAS DE TODOS LOS CLIENTES */
     public void getValues (){
         try {
-            String Query = "SELECT * FROM clientes";
+            String Query = "SELECT * FROM clientes, cuentas, tajeta";
             Statement st = Conexion.createStatement();
             java.sql.ResultSet resultSet;
             resultSet = st.executeQuery(Query);
  
             while (resultSet.next()) {
-                System.out.println("DUI: " + resultSet.getString("DUI_cli")
-                        + "\n Nombre: " + resultSet.getString("nombre_cliente") + resultSet.getString("apellido_cliente")
-                        + "\n Correo: " + resultSet.getString("correo_cliente")
-                        + "\n Telefono: " + resultSet.getString("telefono_cliente"));
+                System.out.println(" DUI: " + resultSet.getString("DUICli")
+                        + "\n Nombre: " + resultSet.getString("nombreCli") + resultSet.getString("apellidoCli")
+                        + "\n Correo: " + resultSet.getString("correoCli")
+                        + "\n Telefono: " + resultSet.getString("telefonoCli")
+                        + "\n Numero de cuenta: " + resultSet.getString("numeroCli")
+                        + "\n Tipo de cuuenta: " +  resultSet.getString("tipoCu")
+                        + "\n Saldo de la cuenta: "+ resultSet.getString("saldoCu"));
             }
  
         } catch (SQLException ex) {
@@ -77,11 +82,11 @@ public class MySQL {
         }
     }
     
-    //METODO PARA CONSULTAR UN SOLO CLIENTE
-    public void validarUsuario(String usuario, String pass){
+    /*METODO PARA CONSULTAR UN SOLO CLIENTE */
+    public void validarUsuario(int tarjeta, int pin){
         try{
 
-            String Query = "SELECT * FROM clientes where nombre_cliente='"+ usuario+"'"+" and DUI_cli='"+ pass+"';";
+            String Query = "SELECT * FROM tajeta where numeroTar='"+ tarjeta+"'"+" and PINTar='"+ pin+"';";
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery(Query);
             if( rs.first() ){

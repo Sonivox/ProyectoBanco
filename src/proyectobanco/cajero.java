@@ -1,6 +1,8 @@
 package proyectobanco;
+import static java.lang.Integer.parseInt;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class cajero extends javax.swing.JFrame {
@@ -15,10 +17,10 @@ public class cajero extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         loginBTN = new javax.swing.JButton();
-        usuTXT = new javax.swing.JTextField();
+        usu1TXT = new javax.swing.JTextField();
         contraTXT = new javax.swing.JPasswordField();
-        jLabel4 = new javax.swing.JLabel();
         cerrarBTN = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,24 +54,30 @@ public class cajero extends javax.swing.JFrame {
                 loginBTNActionPerformed(evt);
             }
         });
-        getContentPane().add(loginBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 120, 60));
+        getContentPane().add(loginBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 120, 40));
 
-        usuTXT.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        usuTXT.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        usuTXT.addActionListener(new java.awt.event.ActionListener() {
+        usu1TXT.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        usu1TXT.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        usu1TXT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuTXTActionPerformed(evt);
+                usu1TXTActionPerformed(evt);
             }
         });
-        getContentPane().add(usuTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 250, 40));
+        usu1TXT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                usu1TXTKeyTyped(evt);
+            }
+        });
+        getContentPane().add(usu1TXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 250, 40));
 
         contraTXT.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         contraTXT.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        contraTXT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                contraTXTKeyTyped(evt);
+            }
+        });
         getContentPane().add(contraTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 250, 40));
-
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user_icon-icons.com_66546.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, 140));
 
         cerrarBTN.setBackground(new java.awt.Color(255, 255, 255));
         cerrarBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cerrar X.png"))); // NOI18N
@@ -80,6 +88,10 @@ public class cajero extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cerrarBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 30, 30));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user_icon-icons.com_66546.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, 140));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo-login.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -92,27 +104,50 @@ public class cajero extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
-    private void usuTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuTXTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usuTXTActionPerformed
-
     private void loginBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBTNActionPerformed
-        menu abrir = new menu();
-        abrir.setVisible(true);
-        this.setVisible(false);
+
         MySQL db = new MySQL();
         try {
-            db.MySQLConnection();
-            db.validarUsuario(usuTXT.getText(), contraTXT.getText());
+            try{
+                int tarjeta = parseInt(usu1TXT.getText());
+                int pin = parseInt(contraTXT.getText());
+                menu m = new menu();
+                m.setVisible(true);
+                //this.setVisible(false);
+                db.MySQLConnection();
+                db.validarUsuario(tarjeta, pin);
+                
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "NO INGRESE LETRAS");
+            }
         } catch (Exception ex) {
             Logger.getLogger(cajero.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loginBTNActionPerformed
 
     private void cerrarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarBTNActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_cerrarBTNActionPerformed
+
+    private void contraTXTKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraTXTKeyTyped
+        int limite = 3;
+        if(contraTXT.getText().length() > limite){
+            JOptionPane.showMessageDialog(null, "CONTRASEÑA NO VALIDA");
+            contraTXT.setText(null);
+        }
+    }//GEN-LAST:event_contraTXTKeyTyped
+
+    private void usu1TXTKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usu1TXTKeyTyped
+        int limite = 16;
+        if(usu1TXT.getText().length() > limite){
+            JOptionPane.showMessageDialog(null, "NUMERO DE TARJETA INVALIDO");
+            usu1TXT.setText(null);
+        }
+    }//GEN-LAST:event_usu1TXTKeyTyped
+
+    private void usu1TXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usu1TXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usu1TXTActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -131,6 +166,6 @@ public class cajero extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton loginBTN;
-    private javax.swing.JTextField usuTXT;
+    private javax.swing.JTextField usu1TXT;
     // End of variables declaration//GEN-END:variables
 }
