@@ -17,10 +17,10 @@ public class cajero extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         loginBTN = new javax.swing.JButton();
-        usu1TXT = new javax.swing.JTextField();
         contraTXT = new javax.swing.JPasswordField();
         cerrarBTN = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        tarjetaTXT = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,22 +56,13 @@ public class cajero extends javax.swing.JFrame {
         });
         getContentPane().add(loginBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 120, 40));
 
-        usu1TXT.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        usu1TXT.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        usu1TXT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usu1TXTActionPerformed(evt);
-            }
-        });
-        usu1TXT.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                usu1TXTKeyTyped(evt);
-            }
-        });
-        getContentPane().add(usu1TXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 250, 40));
-
         contraTXT.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         contraTXT.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        contraTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contraTXTActionPerformed(evt);
+            }
+        });
         contraTXT.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 contraTXTKeyTyped(evt);
@@ -93,6 +84,20 @@ public class cajero extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user_icon-icons.com_66546.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, 140));
 
+        try {
+            tarjetaTXT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#### #### #### ####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tarjetaTXT.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tarjetaTXT.setFont(new java.awt.Font("Cambria Math", 0, 24)); // NOI18N
+        tarjetaTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tarjetaTXTActionPerformed(evt);
+            }
+        });
+        getContentPane().add(tarjetaTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 250, 40));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo-login.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 430));
@@ -109,16 +114,18 @@ public class cajero extends javax.swing.JFrame {
         MySQL db = new MySQL();
         try {
             try{
-                int tarjeta = parseInt(usu1TXT.getText());
+                String tarjeta = tarjetaTXT.getText();
+                tarjeta = tarjeta.replaceAll(" ", "");
                 int pin = parseInt(contraTXT.getText());
                 menu m = new menu();
                 m.setVisible(true);
                 //this.setVisible(false);
                 db.MySQLConnection();
                 db.validarUsuario(tarjeta, pin);
-                
             }catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "NO INGRESE LETRAS");
+                contraTXT.setText("");
+                tarjetaTXT.setText("");
             }
         } catch (Exception ex) {
             Logger.getLogger(cajero.class.getName()).log(Level.SEVERE, null, ex);
@@ -137,17 +144,13 @@ public class cajero extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_contraTXTKeyTyped
 
-    private void usu1TXTKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usu1TXTKeyTyped
-        int limite = 16;
-        if(usu1TXT.getText().length() > limite){
-            JOptionPane.showMessageDialog(null, "NUMERO DE TARJETA INVALIDO");
-            usu1TXT.setText(null);
-        }
-    }//GEN-LAST:event_usu1TXTKeyTyped
-
-    private void usu1TXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usu1TXTActionPerformed
+    private void tarjetaTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarjetaTXTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usu1TXTActionPerformed
+    }//GEN-LAST:event_tarjetaTXTActionPerformed
+
+    private void contraTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contraTXTActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -166,6 +169,6 @@ public class cajero extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton loginBTN;
-    private javax.swing.JTextField usu1TXT;
+    private javax.swing.JFormattedTextField tarjetaTXT;
     // End of variables declaration//GEN-END:variables
 }

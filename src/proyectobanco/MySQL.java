@@ -31,7 +31,8 @@ public class MySQL {
         }
     }
     
-    //CERRAR LA CONEXION CON LA BASE DE DATOS
+    /*CERRAR LA CONEXION CON LA BASE DE DATOS:
+    cierra la conexion cuando el usuario termine*/
     public void cerrarConnection(){
         try {
             Conexion.close();
@@ -82,11 +83,11 @@ public class MySQL {
         }
     }
     
-    /*METODO PARA CONSULTAR UN SOLO CLIENTE */
-    public void validarUsuario(int tarjeta, int pin){
+    /*METODO PARA VALIDAR CLIENTE*/
+    public void validarUsuario(String tarjeta, int pin){
         try{
 
-            String Query = "SELECT * FROM tajeta where numeroTar='"+ tarjeta+"'"+" and PINTar='"+ pin+"';";
+            String Query = "SELECT * FROM tajeta where numeroTar='"+ tarjeta +"'"+" and PINTar='"+ pin+"';";
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery(Query);
             if( rs.first() ){
@@ -98,6 +99,15 @@ public class MySQL {
         }
         catch (Exception e){
             e.printStackTrace();
+        }
+    }
+    /*METODO PARA SACAR DINERO DE LA CUENTA*/
+    public void retiroDinerio(double dinero, int cuenta){
+        try{
+            String Query = "UPDATE FROM cuentas set saldoCu = saldoCu - " + String.valueOf(dinero) + " where numeroCu = " + String.valueOf(cuenta);
+        }
+        catch(Exception e){
+            
         }
     }
 }
