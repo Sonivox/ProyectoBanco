@@ -62,19 +62,22 @@ public class MySQL {
     /* METODO PARA LAS CONSULTAS DE TODOS LOS CLIENTES */
     public void getValues (){
         try {
-            String Query = "SELECT * FROM clientes, cuentas, tajeta";
+            String Query = "SELECT * FROM clientes, cuentas , tajeta";
             Statement st = Conexion.createStatement();
             java.sql.ResultSet resultSet;
             resultSet = st.executeQuery(Query);
  
             while (resultSet.next()) {
-                System.out.println(" DUI: " + resultSet.getString("DUICli")
-                        + "\n Nombre: " + resultSet.getString("nombreCli") + resultSet.getString("apellidoCli")
+                System.out.println(" ID: " + resultSet.getString("IDCli")
+                        + "\n DUI: " + resultSet.getString("DUICli")
+                        + "\n Nombre: " + resultSet.getString("nombreCli") + " " + resultSet.getString("apellidoCli")
                         + "\n Correo: " + resultSet.getString("correoCli")
                         + "\n Telefono: " + resultSet.getString("telefonoCli")
-                        + "\n Numero de cuenta: " + resultSet.getString("numeroCli")
+                        + "\n Numero de cuenta: " + resultSet.getString("numeroCu")
                         + "\n Tipo de cuuenta: " +  resultSet.getString("tipoCu")
-                        + "\n Saldo de la cuenta: "+ resultSet.getString("saldoCu"));
+                        + "\n Saldo de la cuenta: " + resultSet.getString("saldoCu")
+                        + "\n Numero de tarjeta: " + resultSet.getString("numeroTar")
+                        + "\n Fecha de expiracion de la tarjeta: " + resultSet.getString("expiraTar"));
             }
  
         } catch (SQLException ex) {
