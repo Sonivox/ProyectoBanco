@@ -122,6 +122,10 @@ public class cajero extends javax.swing.JFrame {
                 //this.setVisible(false);
                 db.MySQLConnection();
                 db.validarUsuario(tarjeta, pin);
+<<<<<<< HEAD
+=======
+                db.getValues();
+>>>>>>> 8c9ae06d11c217704a962d735dcc97a44bfc5a00
             }catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "NO INGRESE LETRAS");
                 contraTXT.setText("");
