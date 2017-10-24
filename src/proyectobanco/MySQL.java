@@ -1,4 +1,5 @@
 package proyectobanco;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -105,12 +106,15 @@ public class MySQL {
         }
     }
     /*METODO PARA SACAR DINERO DE LA CUENTA*/
-    public void retiroDinerio(double dinero, int cuenta){
+    public void retiroDinerio(int cantidad, int cuenta){
         try{
-            String Query = "UPDATE FROM cuentas set saldoCu = saldoCu - " + String.valueOf(dinero) + " where numeroCu = " + String.valueOf(cuenta);
+            CallableStatement proc = Conexion.prepareCall(" CALL retiro_20(?,?) ");
+            proc.setInt("cantidad",cantidad);
+            proc.setInt("idcu", cuenta);
+            proc.execute();
         }
         catch(Exception e){
-            
+            System.out.println("nel perro");
         }
     }
 }
