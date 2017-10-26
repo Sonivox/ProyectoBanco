@@ -10,10 +10,21 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class MySQL {
-
+    
+    //VARIABLES PARA CONEXION Y CONSULTAS A LA BASE DE DATOS "CAJERO"
     private static Connection Conexion;
-    public String saldo = "";
     String Query;
+    
+    /*VARIABLES PUBLICAS PARA GUARDAR LA INFORMACION DEL USUARIO DE
+      DE LA BASE DE DATOS "CAJERO" Y LAS TABLAS CUENTAS Y TARJETA */
+    public static String saldo = "";
+    public static String cuenta = "";
+    public static String ID = "";
+    public static String nombre = "";
+    public static String apellido = "";
+    public static String tarjeta = "";
+    public static String expira = "";
+    
     /*METODO PARA LA CONEXION CON LA BASE DE DATOS:
     se usa el driver de java para concetarce y se le pasan los
     datos del servidor, usuario y contraseña luego tira 
@@ -23,7 +34,8 @@ public class MySQL {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/cajero", "root", "");
-            JOptionPane.showMessageDialog(null, "Se ha iniciado la conexión");
+            JOptionPane.showMessageDialog(null, "Se ha iniciado la conexión",
+            "INICIO DE LA CONEXION CON EL CAJERO",JOptionPane.INFORMATION_MESSAGE);
         }
         catch (ClassNotFoundException ex) {
             Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
@@ -38,18 +50,25 @@ public class MySQL {
     public void cerrarConnection(){
         try {
             Conexion.close();
-            JOptionPane.showMessageDialog(null, "Se ha finalizado la conexión");
+            JOptionPane.showMessageDialog(null, "Se ha finalizado la conexión",
+            "FIN DE LA CONEXION CON EL CAJERO", JOptionPane.INFORMATION_MESSAGE);
             saldo = "";
+            cuenta = "";
+            ID = "";
+            nombre = "";
+            apellido = "";
+            tarjeta = "";
+            expira = "";
         }
         catch (SQLException ex) {
-            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex  );
         }
     }
     
     /*INSERTAR DATOS EN LA TABLA DE DATOS */
     public void insertCliente(String nombre, String apellido, String DUI, String correo, String telefono) {
         try {
-            String Query = "INSERT INTO clientes" + " VALUES("
+            Query = "INSERT INTO clientes" + " VALUES("
                     + "\"" + nombre + "\", "
                     + "\"" + apellido + "\", "
                     + "\"" + DUI + "\", "
@@ -59,14 +78,14 @@ public class MySQL {
             st.executeUpdate(Query);
             JOptionPane.showMessageDialog(null, "Datos almacenados de forma exitosa");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error en el almacenamiento de datos");
+            JOptionPane.showMessageDialog(null, "Error en el almacenamiento de datos", "MENSAJE DE ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     /* METODO PARA LAS CONSULTAS DE TODOS LOS CLIENTES */
     public void getValores(){
         try {
-            String Query = "SELECT * FROM clientes, cuentas , tajeta";
+            Query = "SELECT * FROM clientes, cuentas , tajeta";
             Statement st = Conexion.createStatement();
             java.sql.ResultSet resultSet;
             resultSet = st.executeQuery(Query);
@@ -85,20 +104,30 @@ public class MySQL {
             }
  
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error en la adquisición de datos");
+            JOptionPane.showMessageDialog(null, "Error en la adquisición de datos", "MENSAJE DE ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     /*METODO PARA VALIDAR CLIENTE:
     busca el numero de tarjeta del cliente y si es igual al numero de tarjeta
     y sin PIN coincide le deja pasar al menu*/
-    public void validarUsuario(String tarjeta, int pin){
+    public void validarUsuario(String num, int pin){
         try{
-            String Query = "SELECT * FROM tajeta where numeroTar='"+ tarjeta +"'"+" and PINTar='"+ pin+"';";
+            Query = "SELECT * FROM tajeta where numeroTar='"+ num +"'"+" and PINTar='"+ pin+"';";
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery(Query);
             if( rs.first() ){
-                JOptionPane.showMessageDialog(null, "BIENBENIDO");
+                ID = rs.getString("IDCli");
+                cuenta = rs.getString("numeroCu");
+                tarjeta = rs.getString("numeroTar");
+                expira = rs.getString("expiraTar");
+                nombre = rs.getString("nombreCli");
+                apellido = rs.getString("apellidoCli");
+                
+                System.out.println(ID + cuenta + tarjeta + expira + nombre + apellido);
+                
+                
+                JOptionPane.showMessageDialog(null, "BIENBENIDO", "MENSAJE DE EXITO", JOptionPane.INFORMATION_MESSAGE);
                 /*menu m = new menu();
                 cajero c = new cajero();
                 m.setVisible(true);
@@ -110,59 +139,77 @@ public class MySQL {
         }
         catch (Exception e){
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "ERRROR EN EL PROCEDIMIENTO");
+            JOptionPane.showMessageDialog(null, "ERRROR EN EL PROCEDIMIENTO", "MENSAJE DE ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
     /*METODO PARA SACAR DINERO DE LA CUENTA:
     lo que hace el metodo es a traves de la conexion a la base de datos restarle
     a la cantidad que tiene en el SALDO DE LA CUENTA lo que desea retirar mediante
     un procedimiento almacenado en MySQL*/
-    public void retiroDinerio(int cantidad, int cuenta){
+    public void retiroDinerio(int cantidad){
         try{
             CallableStatement proc = Conexion.prepareCall(" CALL retirar_dinero(?,?) ");
             proc.setInt("cantidad",cantidad);
-            proc.setInt("idcu", cuenta);
+            proc.setString("idcu", cuenta);
             proc.execute();
-            JOptionPane.showMessageDialog(null, "RETIRO EFECTUADO CON EXITO DE: $"+ cantidad);
+            JOptionPane.showMessageDialog(null, "RETIRO EFECTUADO CON EXITO DE: $"+ cantidad,
+            "MENSAJE DE APROVACION", JOptionPane.INFORMATION_MESSAGE);
         }
         catch(Exception e){
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "ERROR EN LA TRANSACCION");
+            JOptionPane.showMessageDialog(null, "ERROR EN LA TRANSACCION", "MENSAJE DE ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     /*METODO PARA DEPOSITAR DINERO: 
     lo que hace es lo inverso de retirar dinero solo que en esta ves lo suma
     a la cantidad que tiene en el SALDO DE LA CUENTA*/
-    public void depositarDinero(int cantidad, int cuenta){
+    public void depositarDinero(int cantidad){
         try{
             CallableStatement proc = Conexion.prepareCall("CALL depositar_dinero(?,?)");
             proc.setInt("cantidad", cantidad);
-            proc.setInt("idcu", cuenta);
+            proc.setString("idcu", cuenta);
             proc.execute();
-            JOptionPane.showMessageDialog(null, "DEPOSITO EFECTUADO CON EXITO DE: $"+ cantidad);
+            JOptionPane.showMessageDialog(null, "DEPOSITO EFECTUADO CON EXITO DE: $"+ cantidad,
+            "MENSAJE APROVACION", JOptionPane.INFORMATION_MESSAGE);
         }
         catch(Exception e){
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "ERROR EN LA TRANSSACION");
+            JOptionPane.showMessageDialog(null, "ERROR EN LA TRANSSACION", "MENSAJE DE ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     /*METODO PARA VER EL SALDO: */
-    public void  consultarSaldo(int numero){
+    public void  consultarSaldo(){
         try{
-            String Query = "SELECT saldoCu FROM cuentas WHERE numeroCu =" + numero;
+            Query = "SELECT saldoCu FROM cuentas WHERE numeroCu =" + cuenta;
             Statement st = Conexion.createStatement();
             java.sql.ResultSet resultSet;
             resultSet = st.executeQuery(Query);
             resultSet.first();
             saldo = resultSet.getString("saldoCu");
             
-            JOptionPane.showMessageDialog(null, "CONSULTA EXITOSA ");
+            JOptionPane.showMessageDialog(null, "CONSULTA EXITOSA", "MENSAJE INFORMATIVO", JOptionPane.INFORMATION_MESSAGE);
         }
         catch(Exception e){
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "ERROR EN LA CONSULTA");
+            JOptionPane.showMessageDialog(null, "ERROR EN LA CONSULTA", "MENSAJE DE ERROR", JOptionPane.ERROR_MESSAGE);
+            
+            // JOptionPane.showMessageDialog(null, msj,"Mensaje de Error",JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+    /*METODO PARA GENERAR EL RECIBO SEGUN LO QUE EL USARIO EN EL CAJERO*/
+    public void recibo(){
+        int opcion;
+        opcion = JOptionPane.showConfirmDialog(null, "DESEA RECIBO ?", "RECIBO DE TRANSSACION", JOptionPane.YES_NO_CANCEL_OPTION,
+        JOptionPane.QUESTION_MESSAGE);
+        
+        switch(opcion){
+            case 0:
+                break;
+            case 1:
+                break;
         }
     }
 }

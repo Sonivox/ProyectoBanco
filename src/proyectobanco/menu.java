@@ -8,13 +8,16 @@ package proyectobanco;;
 import static java.lang.Integer.parseInt;
 import javax.swing.JOptionPane;
 
+import static proyectobanco.MySQL.apellido;
+import static proyectobanco.MySQL.cuenta;
+import static proyectobanco.MySQL.nombre;
+
 /**
  *
  * @author Ronald
  */
 public class menu extends javax.swing.JFrame {
-    public static int cuenta;
-    public static int retiro = 0;
+    
     MySQL db = new MySQL();
     /**
      * Creates new form menu
@@ -69,7 +72,10 @@ public class menu extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        cuentaLb = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        nombreLb = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
@@ -287,9 +293,8 @@ public class menu extends javax.swing.JFrame {
         });
         jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 70, 50));
 
-        jButton11.setBackground(new java.awt.Color(0, 102, 102));
+        jButton11.setBackground(new java.awt.Color(204, 204, 204));
         jButton11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton11.setForeground(new java.awt.Color(102, 102, 102));
         jButton11.setText("MENU PRINCIPAL");
         jButton11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
         jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -303,7 +308,7 @@ public class menu extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 220, 30));
+        jPanel2.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 220, 40));
 
         primerRetiroBTN.setBackground(new java.awt.Color(204, 204, 255));
         primerRetiroBTN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -339,12 +344,13 @@ public class menu extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, new java.awt.Color(0, 0, 0), java.awt.Color.black, java.awt.Color.black));
+        jPanel9.setPreferredSize(new java.awt.Dimension(450, 390));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/transa 2.png"))); // NOI18N
-        jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+        jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 130, 120));
 
-        jButton8.setBackground(new java.awt.Color(0, 102, 102));
+        jButton8.setBackground(new java.awt.Color(204, 204, 204));
         jButton8.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jButton8.setForeground(new java.awt.Color(102, 102, 102));
         jButton8.setText("MENU PRINCIPAL");
@@ -360,7 +366,7 @@ public class menu extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel9.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 240, 40));
+        jPanel9.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 240, 40));
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -372,7 +378,7 @@ public class menu extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, 50));
+        jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 100, 50));
 
         jButton7.setBackground(new java.awt.Color(0, 102, 102));
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -384,10 +390,27 @@ public class menu extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel9.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 100, 50));
+        jPanel9.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 100, 50));
 
-        jLabel16.setText("Nombre del numero de cuente :v");
-        jPanel9.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, 30));
+        cuentaLb.setFont(new java.awt.Font("Cambria Math", 2, 18)); // NOI18N
+        cuentaLb.setForeground(new java.awt.Color(255, 0, 51));
+        cuentaLb.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        cuentaLb.setText("numero de cuenta");
+        jPanel9.add(cuentaLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 210, -1));
+
+        jLabel16.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        jLabel16.setText("NOMBRE DEL CLIENTE: ");
+        jPanel9.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
+
+        nombreLb.setFont(new java.awt.Font("Cambria Math", 2, 18)); // NOI18N
+        nombreLb.setForeground(new java.awt.Color(255, 0, 51));
+        nombreLb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nombreLb.setText("nombre del cliente");
+        jPanel9.add(nombreLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 340, 30));
+
+        jLabel19.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        jLabel19.setText("NUMERO DE CUENTA: ");
+        jPanel9.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
         jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 460, 460));
 
@@ -398,7 +421,7 @@ public class menu extends javax.swing.JFrame {
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/sal2.png"))); // NOI18N
         jPanel10.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
 
-        jButton10.setBackground(new java.awt.Color(0, 102, 102));
+        jButton10.setBackground(new java.awt.Color(204, 204, 204));
         jButton10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton10.setForeground(new java.awt.Color(102, 102, 102));
         jButton10.setText("MENU PRINCIPAL");
@@ -414,7 +437,7 @@ public class menu extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-        jPanel10.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 260, 30));
+        jPanel10.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 250, 40));
 
         jLabel18.setBackground(new java.awt.Color(0, 102, 102));
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -440,7 +463,7 @@ public class menu extends javax.swing.JFrame {
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pis2.png"))); // NOI18N
 
-        jButton9.setBackground(new java.awt.Color(0, 102, 102));
+        jButton9.setBackground(new java.awt.Color(204, 204, 204));
         jButton9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton9.setText("MENU PRINCIPAL");
         jButton9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
@@ -487,42 +510,40 @@ public class menu extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jLabel21)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(jLabel21))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cantidadTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(depositoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel20))))))
                 .addContainerGap(103, Short.MAX_VALUE))
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cantidadTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(depositoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cantidadTXT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cantidadTXT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel20)
                 .addGap(18, 18, 18)
                 .addComponent(depositoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(52, 52, 52))
         );
 
         jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 460, 460));
@@ -686,9 +707,12 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-        System.exit(0);
+        JOptionPane.showMessageDialog(null, "VUELVA PRONTO", "ADIOS", JOptionPane.INFORMATION_MESSAGE);
         db.cerrarConnection();
-       
+        
+        cajero c = new cajero();
+        c.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
@@ -697,6 +721,10 @@ public class menu extends javax.swing.JFrame {
         this.jPanel5.setVisible(false);
         this.jPanel6.setVisible(false);
         this.jPanel8.setVisible(false);
+        
+        cuentaLb.setText(cuenta);
+        nombreLb.setText(nombre + " " +apellido);
+        
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
@@ -713,8 +741,8 @@ public class menu extends javax.swing.JFrame {
         this.jPanel4.setVisible(false);
         this.jPanel6.setVisible(false);
         this.jPanel8.setVisible(false);
-        int id = 1;
-        db.consultarSaldo(id);
+        
+        db.consultarSaldo();
         saldoTXT.setText(db.saldo);
     }//GEN-LAST:event_jPanel5MouseClicked
 
@@ -727,9 +755,9 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void retiroSegundoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retiroSegundoBTNActionPerformed
-        int cuenta = 1;
         int cantidad = 20;
-        db.retiroDinerio(cantidad,cuenta);
+        db.retiroDinerio(cantidad);
+        db.recibo();
     }//GEN-LAST:event_retiroSegundoBTNActionPerformed
 
     private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
@@ -767,9 +795,9 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void primerRetiroBTNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_primerRetiroBTNMouseClicked
-        int cuenta = 1;
         int cantidad = 10;
-        db.retiroDinerio(cantidad,cuenta);
+        db.retiroDinerio(cantidad);
+        db.recibo();
     }//GEN-LAST:event_primerRetiroBTNMouseClicked
 
     private void primerRetiroBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primerRetiroBTNActionPerformed
@@ -816,21 +844,22 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        int cuenta = 1;
         int cantidad = 50;
-        db.retiroDinerio(cantidad,cuenta);
+        db.retiroDinerio(cantidad);
+        db.recibo();
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        int cuenta = 1;
+        
         int cantidad = 75;
-        db.retiroDinerio(cantidad,cuenta);
+        db.retiroDinerio(cantidad);
+        db.recibo();
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        int cuenta = 1;
         int cantidad = 100;
-        db.retiroDinerio(cantidad,cuenta);
+        db.retiroDinerio(cantidad);
+        db.recibo();
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void cantidadTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadTXTActionPerformed
@@ -839,8 +868,8 @@ public class menu extends javax.swing.JFrame {
 
     private void depositoBTNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_depositoBTNMouseClicked
         int cantidad = parseInt(cantidadTXT.getText());
-        int cuenta = 1;
-        db.depositarDinero(cantidad, cuenta);
+        db.depositarDinero(cantidad);
+        db.recibo();
     }//GEN-LAST:event_depositoBTNMouseClicked
 
     /**
@@ -880,6 +909,7 @@ public class menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField cantidadTXT;
+    private javax.swing.JLabel cuentaLb;
     private javax.swing.JButton depositoBTN;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -901,6 +931,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -927,6 +958,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel nombreLb;
     private javax.swing.JButton primerRetiroBTN;
     private javax.swing.JButton retiroSegundoBTN;
     private javax.swing.JTextField saldoTXT;

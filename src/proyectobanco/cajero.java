@@ -114,7 +114,7 @@ public class cajero extends javax.swing.JFrame {
                 this.setVisible(false);
                 
             }catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "NO INGRESE LETRAS, NO DEJE ESPACIOS EN ");
+                JOptionPane.showMessageDialog(null, "NO INGRESE LETRAS, NO DEJE ESPACIOS");
                 contraTXT.setText("");
                 tarjetaTXT.setText("");
             }
