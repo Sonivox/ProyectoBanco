@@ -144,7 +144,6 @@ public class registro extends javax.swing.JFrame {
             this.setVisible(false);
             MySQL db = new MySQL();
             db.MySQLConnection();
-            db.insertData(nombre, apellido, DUI, correo, telefono);
         } catch (Exception ex) {
             Logger.getLogger(registro.class.getName()).log(Level.SEVERE, null, ex);
         }

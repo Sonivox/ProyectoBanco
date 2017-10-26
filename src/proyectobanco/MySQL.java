@@ -12,7 +12,8 @@ import javax.swing.JOptionPane;
 public class MySQL {
 
     private static Connection Conexion;
-    
+    public String saldo = "";
+    String Query;
     /*METODO PARA LA CONEXION CON LA BASE DE DATOS:
     se usa el driver de java para concetarce y se le pasan los
     datos del servidor, usuario y contraseña luego tira 
@@ -22,7 +23,7 @@ public class MySQL {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/cajero", "root", "");
-            JOptionPane.showMessageDialog(null, "Se ha iniciado la conexión con el servidor de forma exitosa");
+            JOptionPane.showMessageDialog(null, "Se ha iniciado la conexión");
         }
         catch (ClassNotFoundException ex) {
             Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
@@ -37,7 +38,8 @@ public class MySQL {
     public void cerrarConnection(){
         try {
             Conexion.close();
-            JOptionPane.showMessageDialog(null, "Se ha finalizado la conexión con el servidor");
+            JOptionPane.showMessageDialog(null, "Se ha finalizado la conexión");
+            saldo = "";
         }
         catch (SQLException ex) {
             Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,7 +47,7 @@ public class MySQL {
     }
     
     /*INSERTAR DATOS EN LA TABLA DE DATOS */
-    public void insertData(String nombre, String apellido, String DUI, String correo, String telefono) {
+    public void insertCliente(String nombre, String apellido, String DUI, String correo, String telefono) {
         try {
             String Query = "INSERT INTO clientes" + " VALUES("
                     + "\"" + nombre + "\", "
@@ -62,7 +64,7 @@ public class MySQL {
     }
     
     /* METODO PARA LAS CONSULTAS DE TODOS LOS CLIENTES */
-    public void getValues (){
+    public void getValores(){
         try {
             String Query = "SELECT * FROM clientes, cuentas , tajeta";
             Statement st = Conexion.createStatement();
@@ -87,15 +89,20 @@ public class MySQL {
         }
     }
     
-    /*METODO PARA VALIDAR CLIENTE*/
+    /*METODO PARA VALIDAR CLIENTE:
+    busca el numero de tarjeta del cliente y si es igual al numero de tarjeta
+    y sin PIN coincide le deja pasar al menu*/
     public void validarUsuario(String tarjeta, int pin){
         try{
-
             String Query = "SELECT * FROM tajeta where numeroTar='"+ tarjeta +"'"+" and PINTar='"+ pin+"';";
             Statement st = Conexion.createStatement();
             ResultSet rs = st.executeQuery(Query);
             if( rs.first() ){
                 JOptionPane.showMessageDialog(null, "BIENBENIDO");
+                /*menu m = new menu();
+                cajero c = new cajero();
+                m.setVisible(true);
+                c.setVisible(false); */
             }
             else{
                 JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA NO VALIDOS");
@@ -103,18 +110,59 @@ public class MySQL {
         }
         catch (Exception e){
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERRROR EN EL PROCEDIMIENTO");
         }
     }
-    /*METODO PARA SACAR DINERO DE LA CUENTA*/
+    /*METODO PARA SACAR DINERO DE LA CUENTA:
+    lo que hace el metodo es a traves de la conexion a la base de datos restarle
+    a la cantidad que tiene en el SALDO DE LA CUENTA lo que desea retirar mediante
+    un procedimiento almacenado en MySQL*/
     public void retiroDinerio(int cantidad, int cuenta){
         try{
-            CallableStatement proc = Conexion.prepareCall(" CALL retiro_20(?,?) ");
+            CallableStatement proc = Conexion.prepareCall(" CALL retirar_dinero(?,?) ");
             proc.setInt("cantidad",cantidad);
             proc.setInt("idcu", cuenta);
             proc.execute();
+            JOptionPane.showMessageDialog(null, "RETIRO EFECTUADO CON EXITO DE: $"+ cantidad);
         }
         catch(Exception e){
-            System.out.println("nel perro");
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERROR EN LA TRANSACCION");
+        }
+    }
+    
+    /*METODO PARA DEPOSITAR DINERO: 
+    lo que hace es lo inverso de retirar dinero solo que en esta ves lo suma
+    a la cantidad que tiene en el SALDO DE LA CUENTA*/
+    public void depositarDinero(int cantidad, int cuenta){
+        try{
+            CallableStatement proc = Conexion.prepareCall("CALL depositar_dinero(?,?)");
+            proc.setInt("cantidad", cantidad);
+            proc.setInt("idcu", cuenta);
+            proc.execute();
+            JOptionPane.showMessageDialog(null, "DEPOSITO EFECTUADO CON EXITO DE: $"+ cantidad);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERROR EN LA TRANSSACION");
+        }
+    }
+    
+    /*METODO PARA VER EL SALDO: */
+    public void  consultarSaldo(int numero){
+        try{
+            String Query = "SELECT saldoCu FROM cuentas WHERE numeroCu =" + numero;
+            Statement st = Conexion.createStatement();
+            java.sql.ResultSet resultSet;
+            resultSet = st.executeQuery(Query);
+            resultSet.first();
+            saldo = resultSet.getString("saldoCu");
+            
+            JOptionPane.showMessageDialog(null, "CONSULTA EXITOSA ");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERROR EN LA CONSULTA");
         }
     }
 }

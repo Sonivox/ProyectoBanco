@@ -18,7 +18,6 @@ public class cajero extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         loginBTN = new javax.swing.JButton();
         contraTXT = new javax.swing.JPasswordField();
-        cerrarBTN = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         tarjetaTXT = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -70,16 +69,6 @@ public class cajero extends javax.swing.JFrame {
         });
         getContentPane().add(contraTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 250, 40));
 
-        cerrarBTN.setBackground(new java.awt.Color(255, 255, 255));
-        cerrarBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cerrar X.png"))); // NOI18N
-        cerrarBTN.setContentAreaFilled(false);
-        cerrarBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cerrarBTNActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cerrarBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 30, 30));
-
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/user_icon-icons.com_66546.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, 140));
@@ -117,16 +106,15 @@ public class cajero extends javax.swing.JFrame {
                 String tarjeta = tarjetaTXT.getText();
                 tarjeta = tarjeta.replaceAll(" ", "");
                 int pin = parseInt(contraTXT.getText());
-                
-                menu m = new menu();
-                m.setVisible(true);
-                
-                this.setVisible(false);
                 db.MySQLConnection();
                 db.validarUsuario(tarjeta, pin);
                 
+                menu m = new menu();
+                m.setVisible(true);
+                this.setVisible(false);
+                
             }catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "NO INGRESE LETRAS");
+                JOptionPane.showMessageDialog(null, "NO INGRESE LETRAS, NO DEJE ESPACIOS EN ");
                 contraTXT.setText("");
                 tarjetaTXT.setText("");
             }
@@ -134,10 +122,6 @@ public class cajero extends javax.swing.JFrame {
             Logger.getLogger(cajero.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loginBTNActionPerformed
-
-    private void cerrarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarBTNActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_cerrarBTNActionPerformed
 
     private void contraTXTKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraTXTKeyTyped
         int limite = 3;
@@ -165,7 +149,6 @@ public class cajero extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cerrarBTN;
     private javax.swing.JPasswordField contraTXT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
