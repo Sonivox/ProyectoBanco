@@ -1,6 +1,8 @@
 package proyectobanco;
 import java.util.Calendar;
 
+// ESTA CLASE SIRVE PARA SACAR LA FECHA DE LA COMPUTADOR
+
 public class fecha {
     private Calendar ahora = Calendar.getInstance();
     private int hora = ahora.get(Calendar.HOUR_OF_DAY);
@@ -8,7 +10,8 @@ public class fecha {
     private int mes = ahora.get(Calendar.MONTH) + 1;
     private int dia = ahora.get(Calendar.DAY_OF_MONTH);
     private int año = ahora.get(Calendar.YEAR);
-    public String fecha, nombre = null;
+    
+    public String fecha, nombre = "";
     
     public void fecha(){
         switch(mes){
@@ -49,6 +52,6 @@ public class fecha {
                 nombre = "Diciembre";
                 break;
         }
-        fecha = (hora + " : " + minuto + " P.M." + " del " +  dia + " de " + nombre +" / " + año );
+        fecha = (hora + ":" + minuto + " P.M." + " del " +  dia + " de " + nombre +" " + año );
     }
 }
