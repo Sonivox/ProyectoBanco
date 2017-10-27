@@ -400,7 +400,7 @@ public class menu extends javax.swing.JFrame {
 
         jLabel16.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         jLabel16.setText("NOMBRE DEL CLIENTE: ");
-        jPanel9.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
+        jPanel9.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
 
         nombreLb.setFont(new java.awt.Font("Cambria Math", 2, 18)); // NOI18N
         nombreLb.setForeground(new java.awt.Color(255, 0, 51));
