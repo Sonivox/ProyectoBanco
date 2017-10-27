@@ -44,13 +44,16 @@ public class recibo extends javax.swing.JFrame {
         reciboBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(102, 204, 255));
+        setBackground(new java.awt.Color(0, 102, 102));
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         rutaTXT.setEditable(false);
         rutaTXT.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
         rutaTXT.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(rutaTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 28, 230, 34));
 
+        rutaBTN.setBackground(new java.awt.Color(0, 102, 102));
         rutaBTN.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
         rutaBTN.setText("RUTA");
         rutaBTN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -60,14 +63,18 @@ public class recibo extends javax.swing.JFrame {
                 rutaBTNMouseClicked(evt);
             }
         });
+        getContentPane().add(rutaBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 100, 30));
 
         contenidoTXT.setEditable(false);
         contenidoTXT.setColumns(20);
         contenidoTXT.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
         contenidoTXT.setRows(5);
-        contenidoTXT.setText("NOMBRE: \nAPELLIDO:\nID CLIENTE:\n# CUENTA:\nOPERACION: \nCANTIDAD:\nFECHA:");
+        contenidoTXT.setText("NOMBRE: \n\nAPELLIDO:\n\nID CLIENTE:\n\n# CUENTA:\n\nOPERACION: \n\nCANTIDAD:\n\nFECHA:");
         jScrollPane1.setViewportView(contenidoTXT);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 73, 392, 261));
+
+        reciboBTN.setBackground(new java.awt.Color(0, 102, 102));
         reciboBTN.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
         reciboBTN.setText("GENERAR RECIBO");
         reciboBTN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -77,39 +84,7 @@ public class recibo extends javax.swing.JFrame {
                 reciboBTNActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(rutaTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(rutaBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(reciboBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rutaTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rutaBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(reciboBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(reciboBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 352, 173, 37));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
