@@ -43,17 +43,19 @@ public class recibo extends javax.swing.JFrame {
         contenidoTXT = new javax.swing.JTextArea();
         reciboBTN = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 102, 102));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
+        setForeground(new java.awt.Color(153, 153, 153));
+        setMinimumSize(new java.awt.Dimension(443, 401));
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         rutaTXT.setEditable(false);
         rutaTXT.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
         rutaTXT.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(rutaTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 28, 230, 34));
+        getContentPane().add(rutaTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 230, 34));
 
-        rutaBTN.setBackground(new java.awt.Color(0, 102, 102));
+        rutaBTN.setBackground(new java.awt.Color(204, 204, 204));
         rutaBTN.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
         rutaBTN.setText("RUTA");
         rutaBTN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -63,7 +65,12 @@ public class recibo extends javax.swing.JFrame {
                 rutaBTNMouseClicked(evt);
             }
         });
-        getContentPane().add(rutaBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 100, 30));
+        rutaBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rutaBTNActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rutaBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 100, 30));
 
         contenidoTXT.setEditable(false);
         contenidoTXT.setColumns(20);
@@ -72,9 +79,9 @@ public class recibo extends javax.swing.JFrame {
         contenidoTXT.setText("NOMBRE: \n\nAPELLIDO:\n\nID CLIENTE:\n\n# CUENTA:\n\nOPERACION: \n\nCANTIDAD:\n\nFECHA:");
         jScrollPane1.setViewportView(contenidoTXT);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 73, 392, 261));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 392, 261));
 
-        reciboBTN.setBackground(new java.awt.Color(0, 102, 102));
+        reciboBTN.setBackground(new java.awt.Color(204, 204, 204));
         reciboBTN.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
         reciboBTN.setText("GENERAR RECIBO");
         reciboBTN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -84,7 +91,7 @@ public class recibo extends javax.swing.JFrame {
                 reciboBTNActionPerformed(evt);
             }
         });
-        getContentPane().add(reciboBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 352, 173, 37));
+        getContentPane().add(reciboBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 173, 37));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -119,6 +126,10 @@ public class recibo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERROR EN EL RECIVO", "MENSAJE DE ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_reciboBTNActionPerformed
+
+    private void rutaBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rutaBTNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rutaBTNActionPerformed
 
     /**
      * @param args the command line arguments

@@ -6,11 +6,13 @@
 package proyectobanco;;
 
 import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import static proyectobanco.MySQL.apellido;
 import static proyectobanco.MySQL.cuenta;
 import static proyectobanco.MySQL.nombre;
+import static proyectobanco.MySQL.saldo;
 
 /**
  *
@@ -19,9 +21,9 @@ import static proyectobanco.MySQL.nombre;
 public class menu extends javax.swing.JFrame {
     
     MySQL db = new MySQL();
-    /**
-     * Creates new form menu
-     */
+    public static  ArrayList<String> lista = new ArrayList<>();
+    
+    
     public menu() {
         initComponents();
         setLocationRelativeTo(null);
@@ -34,7 +36,9 @@ public class menu extends javax.swing.JFrame {
         this.jPanel6.setVisible(true);
         this.jPanel8.setVisible(true); 
         
-         
+        jLabel24.setVisible(false);
+        otroTXT.setVisible(false);
+        otraCanBTN.setVisible(false);
     }
 
     /**
@@ -63,19 +67,23 @@ public class menu extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        otroBTN = new javax.swing.JButton();
         primerRetiroBTN = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         retiroSegundoBTN = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        otraCanBTN = new javax.swing.JButton();
+        otroTXT = new javax.swing.JFormattedTextField();
         jPanel9 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        tranBTN = new javax.swing.JButton();
         cuentaLb = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         nombreLb = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        consultaTXT = new javax.swing.JTextArea();
         jPanel10 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
@@ -111,9 +119,10 @@ public class menu extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setBackground(java.awt.Color.darkGray);
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setAutoscrolls(true);
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setMinimumSize(new java.awt.Dimension(700, 460));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -144,18 +153,18 @@ public class menu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 98, Short.MAX_VALUE)
+                    .addGap(0, 90, Short.MAX_VALUE)
                     .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 99, Short.MAX_VALUE)))
+                    .addGap(0, 91, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 48, Short.MAX_VALUE)
+                    .addGap(0, 33, Short.MAX_VALUE)
                     .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 49, Short.MAX_VALUE)))
+                    .addGap(0, 33, Short.MAX_VALUE)))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 200, 100));
@@ -178,7 +187,7 @@ public class menu extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 70, 50));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 70, 50));
 
         jPanel7.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -257,7 +266,7 @@ public class menu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 300, 310));
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 300, 310));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton4.setText("$ 75");
@@ -268,7 +277,7 @@ public class menu extends javax.swing.JFrame {
                 jButton4MouseClicked(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, 70, 50));
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 70, 50));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton5.setText("$ 100");
@@ -279,19 +288,19 @@ public class menu extends javax.swing.JFrame {
                 jButton5MouseClicked(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, 70, 50));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 70, 50));
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 255));
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton6.setText("OTRA");
-        jButton6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        otroBTN.setBackground(new java.awt.Color(255, 255, 255));
+        otroBTN.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        otroBTN.setText("OTRA");
+        otroBTN.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
+        otroBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        otroBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                otroBTNActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 70, 50));
+        jPanel2.add(otroBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, 70, 50));
 
         primerRetiroBTN.setBackground(new java.awt.Color(204, 204, 255));
         primerRetiroBTN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -309,7 +318,7 @@ public class menu extends javax.swing.JFrame {
                 primerRetiroBTNActionPerformed(evt);
             }
         });
-        jPanel2.add(primerRetiroBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 70, 50));
+        jPanel2.add(primerRetiroBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 70, 50));
 
         jButton11.setBackground(new java.awt.Color(0, 102, 102));
         jButton11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -338,21 +347,50 @@ public class menu extends javax.swing.JFrame {
                 retiroSegundoBTNActionPerformed(evt);
             }
         });
-        jPanel2.add(retiroSegundoBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 70, 50));
+        jPanel2.add(retiroSegundoBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 70, 50));
+
+        jLabel24.setFont(new java.awt.Font("Cambria Math", 0, 36)); // NOI18N
+        jLabel24.setText("$");
+        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 20, 30));
+
+        otraCanBTN.setBackground(new java.awt.Color(0, 102, 102));
+        otraCanBTN.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
+        otraCanBTN.setText("ACEPTAR");
+        otraCanBTN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        otraCanBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        otraCanBTN.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                otraCanBTNMouseClicked(evt);
+            }
+        });
+        otraCanBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                otraCanBTNActionPerformed(evt);
+            }
+        });
+        jPanel2.add(otraCanBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 90, 40));
+
+        try {
+            otroTXT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        otroTXT.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        otroTXT.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        jPanel2.add(otroTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, 80, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 460, 460));
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, new java.awt.Color(0, 0, 0), java.awt.Color.black, java.awt.Color.black));
-        jPanel9.setPreferredSize(new java.awt.Dimension(450, 390));
+        jPanel9.setPreferredSize(new java.awt.Dimension(509, 390));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/transa 2.png"))); // NOI18N
-        jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 130, 120));
+        jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 130, 120));
 
         jButton8.setBackground(new java.awt.Color(0, 102, 102));
         jButton8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(102, 102, 102));
         jButton8.setText("MENU PRINCIPAL");
         jButton8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
         jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -368,49 +406,45 @@ public class menu extends javax.swing.JFrame {
         });
         jPanel9.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 220, 30));
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
-        jButton1.setText("Retiro");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        tranBTN.setBackground(new java.awt.Color(204, 204, 204));
+        tranBTN.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
+        tranBTN.setText("TRANSACCIONES");
+        tranBTN.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
+        tranBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tranBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                tranBTNActionPerformed(evt);
             }
         });
-        jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 100, 50));
-
-        jButton7.setBackground(new java.awt.Color(0, 102, 102));
-        jButton7.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
-        jButton7.setText("Deposito");
-        jButton7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
-        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        jPanel9.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 100, 50));
+        jPanel9.add(tranBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 160, 40));
 
         cuentaLb.setFont(new java.awt.Font("Cambria Math", 2, 18)); // NOI18N
         cuentaLb.setForeground(new java.awt.Color(255, 0, 51));
         cuentaLb.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        cuentaLb.setText("              numero de cuenta");
-        jPanel9.add(cuentaLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 260, 30));
+        cuentaLb.setText("numero ");
+        jPanel9.add(cuentaLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 80, 40));
 
         jLabel16.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         jLabel16.setText("NOMBRE DEL CLIENTE: ");
-        jPanel9.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
+        jPanel9.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
 
         nombreLb.setFont(new java.awt.Font("Cambria Math", 2, 18)); // NOI18N
         nombreLb.setForeground(new java.awt.Color(255, 0, 51));
         nombreLb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nombreLb.setText("nombre del cliente");
-        jPanel9.add(nombreLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 340, 30));
+        jPanel9.add(nombreLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 340, 30));
 
         jLabel19.setFont(new java.awt.Font("Cambria Math", 1, 18)); // NOI18N
         jLabel19.setText("NUMERO DE CUENTA: ");
-        jPanel9.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
+        jPanel9.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, -1, -1));
+
+        consultaTXT.setEditable(false);
+        consultaTXT.setColumns(20);
+        consultaTXT.setFont(new java.awt.Font("Cambria Math", 2, 14)); // NOI18N
+        consultaTXT.setRows(5);
+        jScrollPane1.setViewportView(consultaTXT);
+
+        jPanel9.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 400, 270));
 
         jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 460, 460));
 
@@ -423,7 +457,6 @@ public class menu extends javax.swing.JFrame {
 
         jButton10.setBackground(new java.awt.Color(0, 102, 102));
         jButton10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(102, 102, 102));
         jButton10.setText("MENU PRINCIPAL");
         jButton10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
         jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -478,7 +511,7 @@ public class menu extends javax.swing.JFrame {
         jLabel21.setText("    INGRESE EL DINERO A DEPOSITAR  ");
 
         try {
-            cantidadTXT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
+            cantidadTXT.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -744,16 +777,20 @@ public class menu extends javax.swing.JFrame {
         this.jPanel8.setVisible(false);
         
         db.consultarSaldo();
-        saldoTXT.setText(db.saldo);
+        saldoTXT.setText(saldo);
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void otroBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_otroBTNActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+        otroTXT.setText("");
+        jLabel24.setVisible(true);
+        otroTXT.setVisible(true);
+        otraCanBTN.setVisible(true);
+    }//GEN-LAST:event_otroBTNActionPerformed
 
     private void retiroSegundoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retiroSegundoBTNActionPerformed
         int cantidad = 20;
@@ -805,13 +842,12 @@ public class menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_primerRetiroBTNActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void tranBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tranBTNActionPerformed
+        db.consultarTran();
+        for(int i = 0; i<lista.size(); i ++){
+            consultaTXT.append(lista.get(i));
+        }
+    }//GEN-LAST:event_tranBTNActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         this.jPanel10.setVisible(false);
@@ -873,6 +909,20 @@ public class menu extends javax.swing.JFrame {
         db.recibo();
     }//GEN-LAST:event_depositoBTNMouseClicked
 
+    private void otraCanBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_otraCanBTNActionPerformed
+        
+    }//GEN-LAST:event_otraCanBTNActionPerformed
+
+    private void otraCanBTNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_otraCanBTNMouseClicked
+        int cantidad = parseInt(otroTXT.getText());
+        db.retiroDinerio(cantidad);
+        db.recibo();
+        
+        jLabel24.setVisible(false);
+        otroTXT.setVisible(false);
+        otraCanBTN.setVisible(false);
+    }//GEN-LAST:event_otraCanBTNMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -910,16 +960,14 @@ public class menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField cantidadTXT;
+    private javax.swing.JTextArea consultaTXT;
     private javax.swing.JLabel cuentaLb;
     private javax.swing.JButton depositoBTN;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -938,6 +986,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -958,10 +1007,15 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel nombreLb;
+    private javax.swing.JButton otraCanBTN;
+    private javax.swing.JButton otroBTN;
+    private javax.swing.JFormattedTextField otroTXT;
     private javax.swing.JButton primerRetiroBTN;
     private javax.swing.JButton retiroSegundoBTN;
     private javax.swing.JTextField saldoTXT;
+    private javax.swing.JButton tranBTN;
     // End of variables declaration//GEN-END:variables
 }

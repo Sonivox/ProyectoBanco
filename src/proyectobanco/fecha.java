@@ -1,7 +1,7 @@
 package proyectobanco;
 import java.util.Calendar;
 
-// ESTA CLASE SIRVE PARA SACAR LA FECHA DE LA COMPUTADOR
+// ESTA CLASE SIRVE PARA SACAR LA FECHA DE LA COMPUTADORA
 
 public class fecha {
     private Calendar ahora = Calendar.getInstance();
@@ -52,6 +52,15 @@ public class fecha {
                 nombre = "Diciembre";
                 break;
         }
-        fecha = (hora + ":" + minuto + " P.M." + " del " +  dia + " de " + nombre +" " + año );
+        if(hora < 12){
+            fecha = (hora + ":" + minuto + " A.M." + " del " +  dia + " de " + nombre + " " + año );
+        }
+        else if (hora < 18){
+            fecha = (hora + ":" + minuto + " P.M." + " del " +  dia + " de " + nombre +" " + año );
+        }
+        else{
+            fecha = (hora + ":" + minuto + " P.M." + " del " +  dia + " de " + nombre +" " + año );
+        }
+        //fecha = (hora + ":" + minuto + " " + " del " +  dia + " de " + nombre +" " + año );
     }
 }

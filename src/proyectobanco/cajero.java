@@ -109,10 +109,7 @@ public class cajero extends javax.swing.JFrame {
                 db.MySQLConnection();
                 db.validarUsuario(tarjeta, pin);
                 
-                menu m = new menu();
-                m.setVisible(true);
                 this.setVisible(false);
-                
             }catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "NO INGRESE LETRAS, NO DEJE ESPACIOS");
                 contraTXT.setText("");

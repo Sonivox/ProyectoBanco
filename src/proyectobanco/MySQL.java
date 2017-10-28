@@ -27,6 +27,7 @@ public class MySQL {
     public static String expira = "";
     public static String operacion= "";
     public static String cantidad = "";
+    
     /*METODO PARA LA CONEXION CON LA BASE DE DATOS:
     se usa el driver de java para concetarce y se le pasan los
     datos del servidor, usuario y contraseña luego tira 
@@ -129,13 +130,12 @@ public class MySQL {
                 JOptionPane.showMessageDialog(null, "BIENVENIDO: " + nombre + " " +apellido,
                         "MENSAJE DE EXITO", JOptionPane.INFORMATION_MESSAGE);
                 
-                /*menu m = new menu();
-                cajero c = new cajero();
+                menu m = new menu();
                 m.setVisible(true);
-                c.setVisible(false); */
             }
             else{
                 JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA NO VALIDOS");
+                JOptionPane.showMessageDialog(null, "VUELVA HA ABRIR EL PROGRAMA");
             }
         }
         catch (Exception e){
@@ -244,9 +244,31 @@ public class MySQL {
         catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "ERROR EN LA CONSULTA", "MENSAJE DE ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void consultarTran(){
+        try{
+            Query = "SELECT * FROM transaccion WHERE numeroCu = '" + cuenta+"'";
+            Statement st = Conexion.createStatement();
+            java.sql.ResultSet rs;
+            rs = st.executeQuery(Query);
             
-            // JOptionPane.showMessageDialog(null, msj,"Mensaje de Error",JOptionPane.ERROR_MESSAGE);
-
+            while(rs.next()){
+            menu.lista.add(" NUMERO DE TRANSACCION: " + rs.getString("numeroTran")+
+                   "\n FECHA Y HORA: " + rs.getString("fechaTran")+
+                   "\n TIPO DE TRANSSACION: " + rs.getString("tipoTran")+
+                   "\n MONTO DE LA TRANSACCION: $"+ rs.getString("montoTran") + "\n\n");
+            }
+            for(int i = 0; i<menu.lista.size(); i++){
+                menu.lista.get(i);
+            }
+            JOptionPane.showMessageDialog(null, "CONSULTA EXITOSA", "MENSAJE INFORMATIVO", JOptionPane.INFORMATION_MESSAGE);
+            
+        }
+        catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error en la adquisición de datos", "MENSAJE DE ERROR", JOptionPane.ERROR_MESSAGE);
+            System.out.println(ex);
         }
     }
     
